@@ -1,14 +1,13 @@
 #include "main.h"
 
 /**
- * main - print _putchar
- * is written by Judysoty
- * Return: 0
+ * main - prints _putchar and a new line
+ * Return: always 0
 */
 
 int main(void)
-{
 
+{
 putchar ('-');
 putchar ('p');
 putchar ('u');
@@ -20,4 +19,5 @@ putchar ('r');
 putchar ('\n');
 
 return (0);
+
 }
