@@ -9,7 +9,7 @@ extern int print_sign(int n);
 extern int _abs(int);
 extern int print_last_digit(int);
 extern void jack,  _bauer(void)
-extern  void times _table(void);
+extern-  void  times_table (void);
 extern int add(int, int);
 extern  void print,_to_98(int n);
 extern void print,_times_table(int n);
