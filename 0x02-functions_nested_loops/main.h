@@ -13,4 +13,9 @@ extern void times_table(void);
 extern int add(int, int);
 extern void print_to_98(int n);
 extern void print_times_table(int n);
+;100 -times_table.c;
+ 101-natural.c;
+102-fibonacci.c;
+103-fibonacci.c;
+104-fibonacci.c;
 #endif
