@@ -3,7 +3,7 @@
  * main  - prints all alphabets in lowercase.
  *Return: On success 1.
 */
-void print_alphabet(void)
+print_alphabet()
 {
 char i;
 
