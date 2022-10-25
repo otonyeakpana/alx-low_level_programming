@@ -17,6 +17,6 @@ for (b = 0; b < a; b++)
 _putchar(' ');
 }
 putchar('\\');
-6putchar('\n');
+_putchar('\n');
 }
 }
