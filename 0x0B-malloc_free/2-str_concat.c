@@ -1,4 +1,4 @@
-Task 2
+
 #include "main.h"
 #include <stdlib.h>
 
