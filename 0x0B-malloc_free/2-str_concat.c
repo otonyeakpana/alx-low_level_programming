@@ -1,38 +1,32 @@
-
 #include "main.h"
 #include <stdlib.h>
-
-/**
- *alloc_grid - returns a pointer to a 2 dimensional array of integers.
- *@width: width of the array.
- *@height: height of the array.
- *Return: pointer of an array of integers
+ 
+ /**
+  *  * str_concat - Concatenates two strings.
+  *   * @s1: The string to be concatenated upon.
+  *    * @s2: The string to be concatenated to s1.
+  *     * Return: If concatenation fails - NULL.
+  *      * else, a pointer the newly-allocated space in memory
+  *       * containing the concatenated strings.
 */
-int **alloc_grid(int width, int height)
+char *str_concat(char *s1, char *s2)
 {
-int **gridout;
-int i, j;
-if (width < 1 || height < 1)
+char *concat_str;
+int index, concat_index = 0, len = 0;
+if (s1 == NULL)
+s1 = "";
+if (s2 == NULL)
+s2 = "";
+for (index = 0; s1[index] || s2[index]; index++)
+len++;
+concat_str = malloc(sizeof(char) * len);
+if (concat_str == NULL)
 return (NULL);
-gridout = malloc(height * sizeof(int *));
-if (gridout == NULL)
-{
-free(gridout);
-return (NULL);
+for (index = 0; s1[index]; index++)
+concat_str[concat_index++] = s1[index];
+concat_str[concat_index++] = s1[index];
+for (index = 0; s2[index]; index++)
+concat_str[concat_index++] = s2[index];
+return (concat_str);
 }
-for (i = 0; i < height; i++)
-{								
-gridout[i] = malloc(width * sizeof(int));
-if (gridout[i] == NULL)
-{								
-for (i--; i >= 0; i--)
-free(gridout[i]);						
-free(gridout);							
-return (NULL);							
-}
-}
-for (i = 0; i < height; i++)
-for (j = 0; j < width; j++)					
-gridout[i][j] = 0;
-return (gridout);
-}
+
