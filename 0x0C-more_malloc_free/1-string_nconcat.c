@@ -29,7 +29,7 @@ if (sout == NULL)
 return (NULL);
 for (i = 0; i < lsout; i++)
 if (i < ls1)
-sout[i] = s1[i];				
+sout[i] = s1[i];
 else
 sout[i] = s2[i - ls1];
 sout[i] = '\0';
