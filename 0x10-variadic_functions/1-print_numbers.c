@@ -6,7 +6,7 @@
  * * print_numbers - prints numbers
  * * @separator: seperator char
  * * @n: const var
- * */
+*/
 void print_numbers(const char *separator, const unsigned int n, ...)
 {
 unsigned int i;
