@@ -1,52 +1,84 @@
 #include "main.h"
 
 /**
- * * main - copies the content of a file to another file
- * * @argc: number of arguments passed to the program
- * * @argv: array of arguments
- * *
- * * Return: Always 0 (Success)
+ *  * not_close - prints error.
+ *   * @fd: value to print.
 */
+
+void not_close(int fd)
+{
+dprintf(STDERR_FILENO, "Error: Can't close fd %i\n", fd);
+exit(100);
+}
+
+/**
+ *  * cp - copy a file
+ *   * @from: file to copy
+ *    * @to: file to copy in
+*/
+
+void cp(char *from, char *to)
+{
+int file_r, file_w, r, w;
+char buff[1024];
+
+file_r = open(from, O_RDONLY);
+if (file_r == -1)
+{
+dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", from);
+exit(98);
+}
+file_w = open(to, O_CREAT | O_WRONLY | O_TRUNC, 0664);
+if (file_w == -1)
+{
+dprintf(STDERR_FILENO, "Error: Can't write to %s\n", to);
+exit(99);
+}
+r = read(file_r, buff, 1024);
+if (r == -1)
+{
+dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", from);
+exit(98);
+}
+while (r != 0)
+{
+w = write(file_w, buff, r);
+if (w == -1)
+{
+dprintf(STDERR_FILENO, "Error: Can't write to %s", to);
+exit(99);
+}
+r = read(file_r, buff, 1024);
+if (r == -1)
+{
+dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", from);
+exit(98);
+}
+}
+if (close(file_w) == -1)
+not_close(file_r);
+if (close(file_r) == -1)
+not_close(file_w);
+}
+/**
+ *  * main - copy a file into another
+ *   * @argc: size
+ *    * @argv: character.
+ *     * Return: Always 0.
+*/
+
 int main(int argc, char *argv[])
 {
-int fd_r, fd_w, x, m, n;
-char buf[BUFSIZ];
 if (argc != 3)
 {
 dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
 exit(97);
 }
-fd_r = open(argv[1], O_RDONLY);
-if (fd_r < 0)
+if (argv[1] == NULL)
 {
 dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
 exit(98);
 }
-}
-fd_w = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
-while ((x = read(fd_r, buf, BUFSIZ)) > 0)
-{
-if (fd_w < 0 || write(fd_w, buf, x) != x)
-{
-dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-close(fd_r);
-exit(99);
-}
-}
-if (x < 0)
-{
-dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
-exit(98);
-}
-m = close(fd_r);
-n = close(fd_w);
-if (m < 0 || n < 0)
-{
-if (m < 0)
-dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd_r);
-if (n < 0)
-dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd_w);
-exit(100);
-}
+cp(argv[1], argv[2]);
 return (0);
 }
