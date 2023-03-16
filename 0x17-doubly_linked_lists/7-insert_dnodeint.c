@@ -21,17 +21,14 @@ res_mem = res_mem->next;
 }
 if (res_mem->next == NULL)
 return (add_dnodeint_end(h, n));
-
 new_mem = malloc(sizeof(dlistint_t));
-
 if (new_mem == NULL)
-return (NULL)
+return (NULL);
 
 new_mem->n = n;
 new_mem->next = res_mem->next;
 new_mem->prev = res_mem;
 res_mem->next->prev = new_mem;
 res_mem->next = new_mem;
-
 return (new_mem);
 }
